@@ -29,6 +29,7 @@ void AHW_DoorKey::Pickup(AHW_Character* PickupCharacter)
 		}
 	}
 		
-	PickupCharacter->GainUltimateXP(XPValue);
+	PickupCharacter->GainUltimateXP(XPValue);	
 	Destroy();
+	GameModeReference->Victory(PickupCharacter);
 }

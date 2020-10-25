@@ -214,8 +214,7 @@ void AHW_Character::StartUltimate()
 		{
 			GetCharacterMovement()->MaxWalkSpeed = 0.0f;
 			bCanUseWeapon = false;
-			const float StarUltimateMontageDuration = MyAnimInstance->Montage_Play(UltimateMontage);		
-			UGameplayStatics::SetGlobalTimeDilation(GetWorld(), 0.f);
+			const float StarUltimateMontageDuration = MyAnimInstance->Montage_Play(UltimateMontage);					
 			GetWorld()->GetTimerManager().SetTimer(TimerHandle_BeginUltimateBehaviour, this, &AHW_Character::BeginUltimateBehaviour, StarUltimateMontageDuration, false);
 		}
 		else

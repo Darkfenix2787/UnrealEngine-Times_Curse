@@ -23,7 +23,7 @@ class HOMEWORK_API AHW_GameMode : public AGameModeBase
 protected:
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Spectating Camera")
-		float SpectatingBlendTime;
+		float SpectatingBlendTime;	
 
 	UPROPERTY(BlueprintReadOnly, Category = "Level")
 		bool bIsAlertMode;
@@ -46,6 +46,9 @@ protected:
 
 	UPROPERTY(BlueprintReadOnly, Category = "Level")
 		TArray<AHW_Enemy*> LevelEnemies;
+
+	UPROPERTY(BlueprintReadOnly, Category = "Victory")
+		TArray<AActor*> Keys;
 
 	FTimerHandle TimerHandle_BackToMainMenu;
 

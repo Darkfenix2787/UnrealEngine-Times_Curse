@@ -18,7 +18,7 @@ AHW_GameMode::AHW_GameMode()
 void AHW_GameMode::BeginPlay()
 {
 	Super::BeginPlay();
-	SetupSpectatingCameras();	
+	SetupSpectatingCameras();		
 
 	TArray<AActor*> EnemyActors;
 	UGameplayStatics::GetAllActorsOfClass(GetWorld(), AHW_Enemy::StaticClass(), EnemyActors);
@@ -79,14 +79,17 @@ void AHW_GameMode::AddKeyToCharacter(AHW_Character* KeyOwner, FName KeyTag)
 }
 
 void AHW_GameMode::Victory(AHW_Character* Character)
-{
-	Character->DisableInput(nullptr);
-
-	MoveCameraToSpectatingPoint(Character, VictoryCamera);
-	OnVictoryDelegate.Broadcast();
-	PlayMusic(VictoryMusic);
-	GetWorld()->GetTimerManager().SetTimer(TimerHandle_BackToMainMenu, this, &AHW_GameMode::BackToMainMenu, 5.0f, false);
-	BP_Victory(Character);
+{	
+	UGameplayStatics::GetAllActorsWithTag(GetWorld(), "Item", Keys);
+	if (!Keys.IsValidIndex(0))
+	{
+		Character->DisableInput(nullptr);
+		MoveCameraToSpectatingPoint(Character, VictoryCamera);
+		OnVictoryDelegate.Broadcast();
+		PlayMusic(VictoryMusic);
+		GetWorld()->GetTimerManager().SetTimer(TimerHandle_BackToMainMenu, this, &AHW_GameMode::BackToMainMenu, 5.0f, false);
+		BP_Victory(Character);
+	}	
 }
 
 

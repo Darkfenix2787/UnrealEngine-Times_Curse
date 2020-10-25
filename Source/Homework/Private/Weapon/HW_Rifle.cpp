@@ -1,8 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-
-#include "Homework/Homework.h"
 #include "Weapon/HW_Rifle.h"
+#include "Homework/Homework.h"
 #include "DrawDebugHelpers.h"
 #include "Engine/World.h"
 #include "HW_Mine.h"

@@ -18,8 +18,12 @@ void AHW_BotSpawnerKey::Pickup(AHW_Character* PickupCharacter)
 {
 	Super::Pickup(PickupCharacter);
 	AHW_Bot* BotOwner = Cast<AHW_Bot>(MyBot);
-	AHW_BotSpawner* SpawnerOwner = Cast<AHW_BotSpawner>(BotOwner->MySpawner);
-	if(IsValid(SpawnerOwner))
-		SpawnerOwner->SetSpawnerStatus(false);
+	if(IsValid(BotOwner))
+	{
+		AHW_BotSpawner* SpawnerOwner = Cast<AHW_BotSpawner>(BotOwner->MySpawner);
+		if (IsValid(SpawnerOwner))
+			SpawnerOwner->SetSpawnerStatus(false);		
+	}
+	
 	Destroy();
 }

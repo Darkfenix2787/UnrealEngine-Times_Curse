@@ -8,6 +8,7 @@
 
 class UStaticMeshComponent;
 
+
 /**
  * 
  */
@@ -20,6 +21,7 @@ protected:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components")
 		UStaticMeshComponent* KeyMeshComponent;
+
 
 protected:
 
