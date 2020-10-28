@@ -100,6 +100,7 @@ void AHW_Character::BeginPlay()
 	MeleeDetectorComponent->OnComponentBeginOverlap.AddDynamic(this, &AHW_Character::MakeMeleeDamage);
 	HealthComponent->OnHealthChangeDelegate.AddDynamic(this, &AHW_Character::OnHealthChange);
 	NormalWalkSpeed = GetCharacterMovement()->MaxWalkSpeed;
+	Pause();
 }
 
 void AHW_Character::InitializaReferences()
