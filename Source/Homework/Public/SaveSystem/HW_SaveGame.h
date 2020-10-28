@@ -4,7 +4,9 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/SaveGame.h"
+#include "Enemy/HW_Enemy.h"
 #include "HW_SaveGame.generated.h"
+
 
 /**
  * 
@@ -19,6 +21,9 @@ protected:
 	UPROPERTY(VisibleDefaultsOnly, Category = "Data")
 		int EnemiesDefeatedCounter;
 
+	UPROPERTY(VisibleDefaultsOnly, Category = "Data")
+		TArray<AActor*> Enemies;
+
 public:
 
 	UFUNCTION(BlueprintCallable)
@@ -26,5 +31,12 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 		int GetEnemiesDefeatedCounterInfo() { return EnemiesDefeatedCounter; };
+
+
+	UFUNCTION(BlueprintCallable)
+		void SetEnemiesInfo(TArray<AActor*> NewValue) { Enemies = NewValue; };
+
+	UFUNCTION(BlueprintCallable)
+		TArray<AActor*> GetEnemiesInfo() { return Enemies; };
 	
 };

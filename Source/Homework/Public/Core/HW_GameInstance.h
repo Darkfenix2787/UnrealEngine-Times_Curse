@@ -25,6 +25,9 @@ protected:
 	UPROPERTY(VisibleAnywhere, Category = "Enemy Data")
 		int EnemiesDefeatedCounter;
 
+	UPROPERTY(VisibleAnywhere, Category = "Enemy Data")
+		TArray<AActor*> CurrentsEnemies;
+
 public:
 
 	UPROPERTY(BlueprintAssignable)

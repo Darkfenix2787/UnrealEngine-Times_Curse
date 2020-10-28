@@ -3,7 +3,9 @@
 
 #include "Core/HW_GameInstance.h"
 #include "Kismet/GameplayStatics.h"
+#include "Enemy/HW_Enemy.h"
 #include "SaveSystem/HW_SaveGame.h"
+
 
 UHW_GameInstance::UHW_GameInstance()
 {
@@ -19,7 +21,10 @@ void UHW_GameInstance::AddEnemyDefeatedToCounter()
 
 void UHW_GameInstance::SaveData()
 {
-	USaveGame* SaveGameObject = nullptr;
+	USaveGame* SaveGameObject = nullptr;	
+
+	UGameplayStatics::GetAllActorsOfClass(GetWorld(), AHW_Enemy::StaticClass(), CurrentsEnemies);
+
 	bool bExistingData = UGameplayStatics::DoesSaveGameExist(SaveSlotName, 0);
 
 	if (bExistingData)
@@ -33,6 +38,7 @@ void UHW_GameInstance::SaveData()
 		if (IsValid(SaveFile))
 		{
 			SaveFile->SetEnemiesDefeatedCounterInfo(EnemiesDefeatedCounter);
+			SaveFile->SetEnemiesInfo(CurrentsEnemies);
 			UGameplayStatics::SaveGameToSlot(SaveFile, SaveSlotName, 0);
 		}
 	}
@@ -52,6 +58,7 @@ void UHW_GameInstance::LoadData()
 		if (IsValid(SaveFile))
 		{
 			EnemiesDefeatedCounter = SaveFile->GetEnemiesDefeatedCounterInfo();
+			CurrentsEnemies = SaveFile->GetEnemiesInfo();
 		}
 	}
 }
