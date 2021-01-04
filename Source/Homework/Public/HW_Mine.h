@@ -31,6 +31,9 @@ protected:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Components")
 		UStaticMeshComponent* MineMeshComponent;	
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Components")
+		UStaticMeshComponent* AlertMineMeshComponent;
 	
 
 protected:

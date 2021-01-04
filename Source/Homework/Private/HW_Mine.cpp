@@ -38,6 +38,9 @@ AHW_Mine::AHW_Mine()
 	MineMeshComponent = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("MineMeshComponent"));
 	MineMeshComponent->SetupAttachment(RootComponent);	
 
+	AlertMineMeshComponent = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("AlertMineMeshComponent"));
+	AlertMineMeshComponent->SetupAttachment(MineAlertAreaComponent);
+
 }
 
 // Called when the game starts or when spawned
