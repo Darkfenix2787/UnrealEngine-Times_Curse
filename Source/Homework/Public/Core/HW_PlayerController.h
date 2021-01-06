@@ -12,6 +12,5 @@
 UCLASS()
 class HOMEWORK_API AHW_PlayerController : public APlayerController
 {
-	GENERATED_BODY()
-	
+	GENERATED_BODY()	
 };

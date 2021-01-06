@@ -75,6 +75,24 @@ void AHW_Barrel::ExplosionAreaEndOverlap(UPrimitiveComponent* OverlappedComponen
 	}
 }
 
+
+
+void AHW_Barrel::ExplosionAction()
+{
+	if (Cast<AHW_Character>(HW_Character))
+	{
+		BaseSeconds = GetWorld()->GetTimeSeconds();
+		bIsExploded = true;
+	}
+	else
+	{
+		Destroy();
+	}
+
+}
+
+
+
 // Called every frame
 void AHW_Barrel::Tick(float DeltaTime)
 {
@@ -90,8 +108,7 @@ void AHW_Barrel::Tick(float DeltaTime)
 				if ((FreezeSeconds >= SecondCounter))
 				{
 					HW_Character->StopMoveCharacter(0, false);
-					SetActorHiddenInGame(true);
-					FString fstringVar = HW_Character->GetName();
+					SetActorHiddenInGame(true);					
 					SecondCounter = FMath::RoundFromZero(GetWorld()->GetTimeSeconds() - BaseSeconds);					
 				}
 				else
@@ -107,19 +124,5 @@ void AHW_Barrel::Tick(float DeltaTime)
 			}
 		}			
 	}		
-}
-
-void AHW_Barrel::ExplosionAction()
-{
-	if (Cast<AHW_Character>(HW_Character))
-	{		
-		BaseSeconds = GetWorld()->GetTimeSeconds();
-		bIsExploded = true;
-	} 
-	else
-	{
-		Destroy();
-	}
-	
 }
 

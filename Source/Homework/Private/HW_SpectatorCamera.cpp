@@ -12,5 +12,3 @@ AHW_SpectatorCamera::AHW_SpectatorCamera()
 	SpectatingCameraComponent = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("SpectatingCameraComponent"));
 	RootComponent = SpectatingCameraComponent;
 }
-
-

@@ -39,15 +39,6 @@ void AHW_Door::BeginPlay()
 	KeyZoneColliderComponent->OnComponentBeginOverlap.AddDynamic(this, &AHW_Door::CheckKeyFromPlayer);
 }
 
-
-
-// Called every frame
-void AHW_Door::Tick(float DeltaTime)
-{
-	Super::Tick(DeltaTime);
-
-}
-
 void AHW_Door::OpenDoor()
 {
 	FRotator NewRotation = FRotator(0.0f, OpenAngle, 0.0f);
@@ -58,10 +49,11 @@ void AHW_Door::CheckKeyFromPlayer(UPrimitiveComponent* OverlappedComponent, AAct
 {
 	if (IsValid(OtherActor)) 
 	{
-		AHW_Character* OverlappedCharacter = Cast<AHW_Character>(OtherActor);
-		if (IsValid(OverlappedCharacter) && (OverlappedCharacter->GetCharacterType() == EHW_CharacteraType::CharacteraType_Player)) 
+		AHW_Character* OverlappedCharacter = Cast<AHW_Character>(OtherActor);		
+		if (IsValid(OverlappedCharacter))
 		{
-			if (OverlappedCharacter->HasKey(DoorTag)) {
+			bool bIsPlayer = OverlappedCharacter->GetCharacterType() == EHW_CharacteraType::CharacteraType_Player;
+			if (OverlappedCharacter->HasKey(DoorTag) && bIsPlayer) {
 				OpenDoor();
 			}
 		}

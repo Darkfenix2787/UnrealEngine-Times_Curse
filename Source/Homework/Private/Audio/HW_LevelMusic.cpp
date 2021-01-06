@@ -47,4 +47,3 @@ void AHW_LevelMusic::ChangeLevelMusic(bool bIsAlert)
 {
 	MusicAudioComponent->SetBoolParameter(AlertParamName, bIsAlert);
 }
-

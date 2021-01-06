@@ -14,18 +14,6 @@ AHW_Weapon::AHW_Weapon()
 	Damage = 20.f;
 }
 
-// Called when the game starts or when spawned
-void AHW_Weapon::BeginPlay()
-{
-	Super::BeginPlay();	
-}
-
-// Called every frame
-void AHW_Weapon::Tick(float DeltaTime)
-{
-	Super::Tick(DeltaTime);
-}
-
 void AHW_Weapon::StartAction()
 {
 	BP_StartAction();
@@ -49,7 +37,9 @@ void AHW_Weapon::SetCharacterOwner(ACharacter* NewOwner)
 void AHW_Weapon::PlaySound(USoundCue* SoundCue, bool bIs3D, FVector SoundLocation)
 {
 	if (!IsValid(SoundCue))
+	{
 		return;
+	}
 
 	if (bIs3D)
 	{

@@ -98,7 +98,6 @@ void AHW_GameMode::GameOver(AHW_Character* Character)
 	Character->GetMovementComponent()->StopMovementImmediately();
 	Character->GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 
-
 	if (Character->HasToDestroy())
 	{
 		Character->DetachFromControllerPendingDestroy();
@@ -146,8 +145,6 @@ void AHW_GameMode::CheckAlertMode()
 		bIsAlertMode = bEnemyInAlertMode;
 		OnAlertModeChangeDelegate.Broadcast(bIsAlertMode);
 	}
-
-
 }
 
 

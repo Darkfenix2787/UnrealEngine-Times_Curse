@@ -12,7 +12,7 @@ void UHW_ANComboEnable::Notify(USkeletalMeshComponent* MeshComp, UAnimSequenceBa
 		AHW_Character* Character = Cast<AHW_Character>(CharacterActor);
 		if (IsValid(Character))
 		{						
-				Character->SetComboEnable(true);						
+			Character->SetComboEnable(true);						
 		}
 	}
 }

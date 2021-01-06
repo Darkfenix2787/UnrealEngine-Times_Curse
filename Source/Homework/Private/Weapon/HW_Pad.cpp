@@ -28,15 +28,13 @@ AHW_Pad::AHW_Pad()
 // Called when the game starts or when spawned
 void AHW_Pad::BeginPlay()
 {
-	Super::BeginPlay();
-	
+	Super::BeginPlay();	
 }
 
 // Called every frame
 void AHW_Pad::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
 }
 
 void AHW_Pad::NotifyActorBeginOverlap(AActor* OtherActor)
@@ -46,7 +44,9 @@ void AHW_Pad::NotifyActorBeginOverlap(AActor* OtherActor)
 	if (IsValid(OtherActor)) {
 		AHW_Character* OverlappedCharacter = Cast<AHW_Character>(OtherActor);
 		if (IsValid(OverlappedCharacter))
+		{
 			Launch(OverlappedCharacter);
+		}
 	}
 }
 
@@ -59,7 +59,9 @@ void AHW_Pad::Launch(AHW_Character* LaunchCharacter)
 {
 	BP_Launch(LaunchCharacter);	
 
-	if(IsValid(PadOwner))
+	if (IsValid(PadOwner))
+	{
 		PadOwner->DecreaseNumPads();
+	}
 }
 

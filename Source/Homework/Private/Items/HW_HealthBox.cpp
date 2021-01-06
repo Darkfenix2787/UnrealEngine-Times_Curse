@@ -18,6 +18,8 @@ void AHW_HealthBox::Pickup(AHW_Character* PickupCharacter)
 {
 	Super::Pickup(PickupCharacter);
 	bool bSuccesFullHeal = PickupCharacter->TryAddHealth(HealthValue);
-	if(bSuccesFullHeal)
-		Destroy();	
+	if (bSuccesFullHeal)
+	{
+		Destroy();
+	}
 }

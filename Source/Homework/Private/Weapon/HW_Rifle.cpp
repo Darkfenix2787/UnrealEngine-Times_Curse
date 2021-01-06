@@ -101,14 +101,10 @@ void AHW_Rifle::StartAction()
 				}
 			}
 		}
-
-
-	}
-	
+	}	
 }
 
 void AHW_Rifle::StopAction()
 {
-	Super::StopAction();	
-	
+	Super::StopAction();		
 }

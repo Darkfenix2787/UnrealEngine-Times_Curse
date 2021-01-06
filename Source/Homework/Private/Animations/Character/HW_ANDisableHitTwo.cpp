@@ -7,16 +7,16 @@
 void UHW_ANDisableHitTwo::Notify(USkeletalMeshComponent* MeshComp, UAnimSequenceBase* Animation)
 {
 
-	float fCurrentCombo;
+	float CurrentCombo;
 	AActor* CharacterActor = MeshComp->GetOwner();
 	if (IsValid(CharacterActor))
 	{
 		AHW_Character* Character = Cast<AHW_Character>(CharacterActor);
 		if (IsValid(Character))
 		{
-			fCurrentCombo = Character->GetCurrentComboMultiplier();
+			CurrentCombo = Character->GetCurrentComboMultiplier();
 
-			if (fCurrentCombo == 2.0f)
+			if (CurrentCombo == 2.0f)
 			{
 				Character->ResetCombo();
 			}			

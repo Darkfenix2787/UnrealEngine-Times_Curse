@@ -24,8 +24,7 @@ AHW_Enemy::AHW_Enemy()
 	DirectionIndex = 1;
 	WaitingTimeOnPathPoint = 1.0f;
 	XPValue = 20.0f;
-	LootProbability = 100.0f;
-	
+	LootProbability = 100.0f;	
 
 	WidgetHealthBarComponent = CreateDefaultSubobject<UWidgetComponent>(TEXT("WidgetHealtBarComponent"));	
 	WidgetHealthBarComponent->SetupAttachment(RootComponent);
@@ -70,13 +69,17 @@ void AHW_Enemy::GiveXP(AActor* DamageCauser)
 	BP_GiveXP(DamageCauser);	
 
 	if (IsValid(GameInstanceReference))
+	{
 		GameInstanceReference->AddEnemyDefeatedToCounter();
+	}
 }
 
 bool AHW_Enemy::TrySpawnLoot()
 {
-	if (!IsValid(LootItemClass))	
+	if (!IsValid(LootItemClass))
+	{
 		return false;
+	}
 
 	float SelectedProbability = FMath::RandRange(0.0f, 100.0f);
 	if (SelectedProbability <= LootProbability)
@@ -93,7 +96,9 @@ bool AHW_Enemy::TrySpawnLoot()
 void AHW_Enemy::HealthChanged(UHW_HealthComponent* CurrentHealthComponent, AActor* DamagedActor, float Damage, const UDamageType* DamageType, AController* InstigatedBy, AActor* DamageCauser)
 {
 	if (!IsValid(MyAIController))
+	{
 		return;
+	}
 
 	if (bIsShowingHealthBar)
 	{

@@ -23,5 +23,4 @@ public:
 
 	UFUNCTION()
 		void UpdateHealth(float CurrentHealth, float MaxHealth);
-
 };

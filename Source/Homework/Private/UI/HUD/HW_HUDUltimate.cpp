@@ -2,6 +2,8 @@
 
 
 #include "UI/HUD/HW_HUDUltimate.h"
+#include "HW_Character.h" 
+#include "Kismet/GameplayStatics.h"
 
 void UHW_HUDUltimate::InitializeWidget()
 {

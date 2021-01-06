@@ -25,24 +25,26 @@ void AHW_BotSpawner::BeginPlay()
 {
 	Super::BeginPlay();
 
-	GetWorld()->GetTimerManager().SetTimer(TimerHandleSpawnBot, this, &AHW_BotSpawner::SpawnBot, TimeToSpawn, true);
-	
+	GetWorld()->GetTimerManager().SetTimer(TimerHandleSpawnBot, this, &AHW_BotSpawner::SpawnBot, TimeToSpawn, true);	
 }
 
 // Called every frame
 void AHW_BotSpawner::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
 }
 
 void AHW_BotSpawner::SpawnBot()
 {
 	if (!bIsActive)
+	{
 		return;
+	}
 
 	if (CurrentBotsCounter >= MaxBotsCounter)
+	{
 		return;
+	}
 
 	if (IsValid(BotClass))
 	{
@@ -52,14 +54,14 @@ void AHW_BotSpawner::SpawnBot()
 
 		AHW_Bot* NewBot = GetWorld()->SpawnActorDeferred<AHW_Bot>(BotClass, BotTransform);
 		if (IsValid(NewBot))
+		{
 			NewBot->SetSpawner(this);
+		}
 
 		NewBot->FinishSpawning(BotTransform);
 
 		CurrentBotsCounter++;
 	}
-		
-
 }
 
 FVector AHW_BotSpawner::GetSpawnPoint()

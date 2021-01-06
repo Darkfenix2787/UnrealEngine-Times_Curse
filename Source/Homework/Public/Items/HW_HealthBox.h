@@ -38,5 +38,4 @@ public:
 protected:
 
 	virtual void Pickup(AHW_Character* PickupCharacter) override;
-
 };

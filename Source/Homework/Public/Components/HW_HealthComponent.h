@@ -66,7 +66,5 @@ protected:
 	virtual void BeginPlay() override;
 
 	UFUNCTION()
-		void TakingDamage(AActor* DamagedActor, float Damage, const class UDamageType* DamageType, class AController* InstigatedBy, AActor* DamageCauser);
-
-		
+		void TakingDamage(AActor* DamagedActor, float Damage, const class UDamageType* DamageType, class AController* InstigatedBy, AActor* DamageCauser);		
 };

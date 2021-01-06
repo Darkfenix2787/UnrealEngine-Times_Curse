@@ -24,34 +24,24 @@ AHW_LaunchPad::AHW_LaunchPad()
 	LaunchMeshComponent->SetupAttachment(RootComponent);
 	LaunchMeshComponent->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 
-
-	
-
 }
 
 // Called when the game starts or when spawned
 void AHW_LaunchPad::BeginPlay()
 {
-	Super::BeginPlay();
-	
-}
-
-// Called every frame
-void AHW_LaunchPad::Tick(float DeltaTime)
-{
-	Super::Tick(DeltaTime);
-
+	Super::BeginPlay();	
 }
 
 void AHW_LaunchPad::NotifyActorBeginOverlap(AActor* OtherActor)
 {
-
 	Super::NotifyActorBeginOverlap(OtherActor);
 
 	if (IsValid(OtherActor)) {
 		AHW_Character* OverlappedCharacter = Cast<AHW_Character>(OtherActor);
 		if (IsValid(OverlappedCharacter))
+		{
 			LaunchPad(OverlappedCharacter);
+		}			
 	}
 }
 

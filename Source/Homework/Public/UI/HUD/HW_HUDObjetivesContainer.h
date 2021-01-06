@@ -31,6 +31,5 @@ public:
 	void InitializeObjetives(TArray<UHW_HUDObjetive*> NewObjetives);
 
 	UFUNCTION()
-	void UpdateObjetives(FName KeyTag);
-	
+	void UpdateObjetives(FName KeyTag);	
 };

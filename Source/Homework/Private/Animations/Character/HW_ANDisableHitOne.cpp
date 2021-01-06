@@ -6,16 +6,16 @@
 
 void UHW_ANDisableHitOne::Notify(USkeletalMeshComponent* MeshComp, UAnimSequenceBase* Animation)
 {
-	float fCurrentCombo;
+	float CurrentCombo;
 	AActor* CharacterActor = MeshComp->GetOwner();
 	if (IsValid(CharacterActor))
 	{
 		AHW_Character* Character = Cast<AHW_Character>(CharacterActor);
 		if (IsValid(Character))
 		{
-			fCurrentCombo = Character->GetCurrentComboMultiplier();
+			CurrentCombo = Character->GetCurrentComboMultiplier();
 
-			if (fCurrentCombo == 1.0f)
+			if (CurrentCombo == 1.0f)
 			{
 				Character->ResetCombo();
 			}			

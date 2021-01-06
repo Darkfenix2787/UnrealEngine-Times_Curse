@@ -12,6 +12,5 @@
 UCLASS()
 class HOMEWORK_API UHW_HUDSight : public UUserWidget
 {
-	GENERATED_BODY()
-	
+	GENERATED_BODY()	
 };

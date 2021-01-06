@@ -1,6 +1,5 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-
 #include "Enemy/Controller/HW_AIController.h"
 #include "AIModule/Classes/BehaviorTree/BehaviorTree.h"
 #include "Enemy/HW_Enemy.h"
@@ -27,7 +26,9 @@ void AHW_AIController::BeginPlay()
 	Super::BeginPlay();
 
 	if (IsValid(EnemyBehaviorTree))
+	{
 		RunBehaviorTree(EnemyBehaviorTree);
+	}
 
 	MyEnemy = Cast<AHW_Enemy>(K2_GetPawn());
 
@@ -49,8 +50,10 @@ void AHW_AIController::BeginPlay()
 
 void AHW_AIController::UpdateSenses(const TArray<AActor*>& UpdatedActors)
 {	
-		if (!IsValid(Blackboard))
+	if (!IsValid(Blackboard))
+	{
 		return;
+	}
 
 	for (AActor* Actor : UpdatedActors)
 	{

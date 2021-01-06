@@ -34,7 +34,9 @@ void AHW_PadLauncher::StartAction()
 					FRotator MuzzleSocketRotator = CharacterMeshComponent->GetSocketRotation(MuzzleSocketName);
 					AHW_Pad* CurrentProjectile = GetWorld()->SpawnActor<AHW_Pad>(ProjectileClass, MuzzleSocketLocation, MuzzleSocketRotator);
 					if (IsValid(CurrentProjectile))
+					{
 						CurrentProjectile->SetOwner(this);
+					}
 					CurrentPads++;
 				}
 			}			

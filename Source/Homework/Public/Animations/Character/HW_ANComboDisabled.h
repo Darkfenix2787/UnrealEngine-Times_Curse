@@ -14,6 +14,5 @@ class HOMEWORK_API UHW_ANComboDisabled : public UAnimNotify
 {
 	GENERATED_BODY()
 
-	virtual void Notify(USkeletalMeshComponent* MeshComp, UAnimSequenceBase* Animation) override;
-	
+	virtual void Notify(USkeletalMeshComponent* MeshComp, UAnimSequenceBase* Animation) override;	
 };

@@ -53,12 +53,6 @@ void AHW_Mine::BeginPlay()
 	MineComponent->OnComponentBeginOverlap.AddDynamic(this, &AHW_Mine::MineExplosion);	
 }
 
-// Called every frame
-void AHW_Mine::Tick(float DeltaTime)
-{
-	Super::Tick(DeltaTime);
-}
-
 void AHW_Mine::MineAlertBegin(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
 	if (IsValid(OtherActor))
@@ -79,11 +73,16 @@ void AHW_Mine::MineAlertEnd(UPrimitiveComponent* OverlappedComponent, AActor* Ot
 	{
 		AHW_Character* HW_Character = Cast<AHW_Character>(OtherActor);
 
-		if (IsValid(HW_Character) && IsValid(Cast<USphereComponent>(OverlappedComponent)) && HW_Character->GetCharacterType() == EHW_CharacteraType::CharacteraType_Player)
+		if (IsValid(HW_Character))
 		{
-			HW_Character->ModifyDilation(DilationModifier);
-		}
+			bool bIsPlayer = HW_Character->GetCharacterType() == EHW_CharacteraType::CharacteraType_Player;
+			USphereComponent *OComponent = Cast<USphereComponent>(OverlappedComponent);
 
+			if (IsValid(OComponent) && bIsPlayer)
+			{
+				HW_Character->ModifyDilation(DilationModifier);
+			}			
+		}
 	}
 }
 
@@ -93,9 +92,10 @@ void AHW_Mine::MineExplosion(UPrimitiveComponent* OverlappedComponent, AActor* O
 	{
 		AHW_Character* HW_Character = Cast<AHW_Character>(OtherActor);		
 
-		if (IsValid(HW_Character) && HW_Character->GetCharacterType() == EHW_CharacteraType::CharacteraType_Player)
+		if (IsValid(HW_Character))
 		{
-			if (IsValid(ExplosionEffect))
+			bool bIsPlayer = HW_Character->GetCharacterType() == EHW_CharacteraType::CharacteraType_Player;
+			if (IsValid(ExplosionEffect) && bIsPlayer)
 			{
 				UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), ExplosionEffect, this->GetTransform(), true);
 				UGameplayStatics::ApplyDamage(OtherActor, MineDamage, GetInstigatorController(), this, nullptr);

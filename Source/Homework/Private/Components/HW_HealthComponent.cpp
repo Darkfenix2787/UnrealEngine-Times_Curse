@@ -9,9 +9,7 @@ UHW_HealthComponent::UHW_HealthComponent()
 	// Set this component to be initialized when the game starts, and to be ticked every frame.  You can turn these features
 	// off to improve performance if you don't need them.
 	PrimaryComponentTick.bCanEverTick = false;
-
 	MaxHealth = 100.0f;
-
 }
 
 
@@ -45,8 +43,7 @@ void UHW_HealthComponent::TakingDamage(AActor* DamagedActor, float Damage, const
 		return;
 	}
 		
-	Health = FMath::Clamp(Health - Damage, 0.0f, MaxHealth);
-	UE_LOG(LogTemp, Warning, TEXT("Health: , %f"), Health);
+	Health = FMath::Clamp(Health - Damage, 0.0f, MaxHealth);	
 
 	if (Health == 0.0f)
 	{
@@ -72,9 +69,7 @@ bool UHW_HealthComponent::TryAddHealth(float HealthToAdd)
 	}
 
 	Health = FMath::Clamp(Health + HealthToAdd, 0.0f, MaxHealth);
-	OnHealthUpdateDelegate.Broadcast(Health, MaxHealth);
-
-	UE_LOG(LogTemp, Warning, TEXT("Health: , %f"), Health);
+	OnHealthUpdateDelegate.Broadcast(Health, MaxHealth);	
 
 	return true;
 }

@@ -32,9 +32,7 @@ protected:
 		USoundCue* ShootSound;
 
 protected:
-	// Called when the game starts or when spawned
-	virtual void BeginPlay() override;
-
+	
 	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable, Category = "Weapon")
 		void BP_StartAction();
 
@@ -42,8 +40,6 @@ protected:
 		void BP_StopAction();
 
 public:	
-	// Called every frame
-	virtual void Tick(float DeltaTime) override;
 
 	UFUNCTION(BlueprintCallable)
 		virtual void StartAction();

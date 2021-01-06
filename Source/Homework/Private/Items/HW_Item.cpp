@@ -28,8 +28,7 @@ void AHW_Item::BeginPlay()
 {
 	Super::BeginPlay();
 
-	GameModeReference = Cast<AHW_GameMode>(GetWorld()->GetAuthGameMode());
-	
+	GameModeReference = Cast<AHW_GameMode>(GetWorld()->GetAuthGameMode());	
 }
 
 
@@ -37,7 +36,6 @@ void AHW_Item::BeginPlay()
 void AHW_Item::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
 }
 
 void AHW_Item::NotifyActorBeginOverlap(AActor* OtherActor)
@@ -46,8 +44,10 @@ void AHW_Item::NotifyActorBeginOverlap(AActor* OtherActor)
 
 	if (IsValid(OtherActor)) {
 		AHW_Character* OverlappedCharacter = Cast<AHW_Character>(OtherActor);
-		if(IsValid(OverlappedCharacter) && (OverlappedCharacter->GetCharacterType() == EHW_CharacteraType::CharacteraType_Player) )
+		if (IsValid(OverlappedCharacter) && (OverlappedCharacter->GetCharacterType() == EHW_CharacteraType::CharacteraType_Player))
+		{
 			Pickup(OverlappedCharacter);
+		}
 	}	
 }
 
@@ -55,4 +55,3 @@ void AHW_Item::Pickup(AHW_Character* PickupCharacter)
 {
 	BP_PickUp(PickupCharacter);
 }
-

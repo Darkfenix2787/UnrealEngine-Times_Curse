@@ -36,7 +36,5 @@ public:
 		void OnVictory();
 
 	UFUNCTION()
-		void OnGameOver();
-
-	
+		void OnGameOver();	
 };

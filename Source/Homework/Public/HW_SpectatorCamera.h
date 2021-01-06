@@ -38,7 +38,4 @@ public:
 	AHW_SpectatorCamera();
 
 	EHW_SpectatingCameraType GetCameraType() { return CameraType; };
-
-
-
 };

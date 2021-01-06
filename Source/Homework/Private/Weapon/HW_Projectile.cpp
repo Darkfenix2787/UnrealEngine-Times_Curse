@@ -27,13 +27,4 @@ AHW_Projectile::AHW_Projectile()
 void AHW_Projectile::BeginPlay()
 {
 	Super::BeginPlay();
-
 }
-
-// Called every frame
-void AHW_Projectile::Tick(float DeltaTime)
-{
-	Super::Tick(DeltaTime);
-
-}
-

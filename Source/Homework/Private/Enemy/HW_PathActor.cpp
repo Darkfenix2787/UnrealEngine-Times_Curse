@@ -12,14 +12,12 @@ AHW_PathActor::AHW_PathActor()
 
 	PathBillboardComponent = CreateDefaultSubobject<UBillboardComponent>(TEXT("PathBillboard"));
 	RootComponent = PathBillboardComponent;
-
 }
 
 // Called when the game starts or when spawned
 void AHW_PathActor::BeginPlay()
 {
-	Super::BeginPlay();
-	
+	Super::BeginPlay();	
 }
 
 

@@ -64,7 +64,5 @@ protected:
 		void BP_LoadData();
 
 	UFUNCTION(BlueprintImplementableEvent)
-		void BP_ResetData();
-
-	
+		void BP_ResetData();	
 };

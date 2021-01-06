@@ -20,10 +20,10 @@ void AHW_DoorKey::Pickup(AHW_Character* PickupCharacter)
 {
 	Super::Pickup(PickupCharacter);
 
-
-	if (IsValid(PickupCharacter) && PickupCharacter->GetCharacterType() == EHW_CharacteraType::CharacteraType_Player)
+	if (IsValid(PickupCharacter))
 	{
-		if (IsValid(GameModeReference))
+		bool bIsPlayer = PickupCharacter->GetCharacterType() == EHW_CharacteraType::CharacteraType_Player;
+		if (IsValid(GameModeReference) && bIsPlayer)
 		{
 			GameModeReference->AddKeyToCharacter(PickupCharacter, KeyTag);
 		}

@@ -17,6 +17,5 @@ class HOMEWORK_API UHW_CheatManager : public UCheatManager
 public:
 
 	UFUNCTION(exec)
-		void HW_UltimateReady();
-	
+		void HW_UltimateReady();	
 };

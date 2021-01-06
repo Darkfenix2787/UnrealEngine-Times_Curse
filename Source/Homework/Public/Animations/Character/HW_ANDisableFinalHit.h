@@ -15,6 +15,5 @@ class HOMEWORK_API UHW_ANDisableFinalHit : public UAnimNotify
 	GENERATED_BODY()
 
 	virtual void Notify(USkeletalMeshComponent* MeshComp, UAnimSequenceBase* Animation) override;
-
 	
 };

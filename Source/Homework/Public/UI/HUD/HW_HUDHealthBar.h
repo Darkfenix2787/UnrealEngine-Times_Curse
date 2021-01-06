@@ -34,6 +34,5 @@ public:
 		void InitializeWidget();
 
 	UFUNCTION()
-		void UpdateHealth(float CurrentHealth, float MaxHealth);
-	
+		void UpdateHealth(float CurrentHealth, float MaxHealth);	
 };

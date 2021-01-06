@@ -14,7 +14,5 @@ class HOMEWORK_API UHW_ANStepSound : public UAnimNotify
 {
 	GENERATED_BODY()
 
-
-	virtual void Notify(USkeletalMeshComponent* MeshComp, UAnimSequenceBase* Animation);
-	
+	virtual void Notify(USkeletalMeshComponent* MeshComp, UAnimSequenceBase* Animation);	
 };

@@ -99,5 +99,4 @@ public:
 	void HideHealthBar();
 	void ShowHealthBar();
 	void SetAlert(bool bValue);
-
 };

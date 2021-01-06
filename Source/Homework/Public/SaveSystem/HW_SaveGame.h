@@ -37,6 +37,5 @@ public:
 		void SetEnemiesInfo(TArray<AActor*> NewValue) { Enemies = NewValue; };
 
 	UFUNCTION(BlueprintCallable)
-		TArray<AActor*> GetEnemiesInfo() { return Enemies; };
-	
+		TArray<AActor*> GetEnemiesInfo() { return Enemies; };	
 };

@@ -5,8 +5,7 @@
 #include "HW_Character.h"
 
 void UHW_ANSMelee::NotifyBegin(USkeletalMeshComponent* MeshComp, UAnimSequenceBase* Animation, float TotalDuration)
-{
-	
+{	
 	AActor* CharacterActor = MeshComp->GetOwner();
 
 	if (IsValid(CharacterActor))

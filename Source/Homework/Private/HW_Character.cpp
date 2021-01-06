@@ -26,19 +26,18 @@
 AHW_Character::AHW_Character()
 {
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
-	PrimaryActorTick.bCanEverTick = true;
-	
+	PrimaryActorTick.bCanEverTick = true;	
 	bUseFirstPersonView = true;
 	bCanUseWeapon = true;
 	FPSCameraSocketName = "SCK_Camera_Eye";	
-	MeleeSocketName = "SCK_Melee";
-	JumpMaxCount = 2;	
+	MeleeSocketName = "SCK_Melee";	
 	MeleeDamage = 10.0f;	
 	Dilation = 1.0f;
 	MaxComboMultiplier = 4.0f;
 	CurrentComboMultiplier = 1.0f;
 	Speed = 1;	
 	MainMenuMapName = "MainMenu";
+	JumpMaxCount = 1;
 
 	FPSCameraComponent = CreateDefaultSubobject<UCameraComponent>(TEXT("FPS_CameraComponent"));
 	FPSCameraComponent->bUsePawnControlRotation = true;	
@@ -99,7 +98,7 @@ void AHW_Character::BeginPlay()
 	CreateInitialWeapon();
 	MeleeDetectorComponent->OnComponentBeginOverlap.AddDynamic(this, &AHW_Character::MakeMeleeDamage);
 	HealthComponent->OnHealthChangeDelegate.AddDynamic(this, &AHW_Character::OnHealthChange);
-	NormalWalkSpeed = GetCharacterMovement()->MaxWalkSpeed;
+	NormalWalkSpeed = GetCharacterMovement()->MaxWalkSpeed;	
 	Pause();
 }
 
@@ -247,7 +246,6 @@ void AHW_Character::BeginUltimateBehaviour()
 
 void AHW_Character::DilationIteration(float CustomIterator)
 {
-
 	for (TActorIterator<AActor> ActorIterator(GetWorld()); ActorIterator; ++ActorIterator)
 	{
 		AActor* Actor = *ActorIterator;
@@ -271,7 +269,9 @@ void AHW_Character::PlayStepSound()
 void AHW_Character::PlayVoiceSound(USoundCue* VoiceSound)
 {
 	if (!IsValid(VoiceSound))
+	{
 		return;
+	}
 
 	VoicesSoundComponent->SetSound(VoiceSound);
 	VoicesSoundComponent->Play();
@@ -284,7 +284,9 @@ void AHW_Character::StopUltimate()
 void AHW_Character::GoToMainMenu()
 {	
 	if (IsValid(GameInstanceReference))
+	{
 		GameInstanceReference->SaveData();
+	}
 
 	UGameplayStatics::OpenLevel(GetWorld(), MainMenuMapName);
 }
@@ -302,8 +304,6 @@ void AHW_Character::Pause()
 		else
 			PauseWidget->RemoveFromParent();
 	}
-		
-	
 }
 
 void AHW_Character::MakeMeleeDamage(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
@@ -442,7 +442,6 @@ void AHW_Character::StopWeaponAction()
 	if (IsValid(CurrentWeapon))
 	{
 		CurrentWeapon->StopAction();
-
 
 		if (bIsUsingUltimate)
 		{

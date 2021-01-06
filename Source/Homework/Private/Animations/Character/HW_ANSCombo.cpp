@@ -12,8 +12,7 @@ void UHW_ANSCombo::NotifyBegin(USkeletalMeshComponent* MeshComp, UAnimSequenceBa
 		AHW_Character* Character = Cast<AHW_Character>(CharacterActor);
 		if (IsValid(Character))
 		{
-			Character->SetComboEnable(true);
-			UE_LOG(LogTemp, Warning, TEXT("InicioCombo"));
+			Character->SetComboEnable(true);			
 		}
 	}
 }

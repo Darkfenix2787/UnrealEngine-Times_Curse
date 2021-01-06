@@ -63,5 +63,4 @@ public:
 	void NotifyBotDead();
 
 	void SetSpawnerStatus(bool NewStatus) { bIsActive = NewStatus; };
-
 };

@@ -39,6 +39,5 @@ protected:
 		void BP_ContinueGame();
 
 	UFUNCTION(BlueprintImplementableEvent, Category = "Main Menu")
-		void BP_QuitGame();
-	
+		void BP_QuitGame();	
 };

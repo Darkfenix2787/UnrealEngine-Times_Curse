@@ -59,8 +59,10 @@ void AHW_Bot::BeginPlay()
 	APawn* PlayerPawn = UGameplayStatics::GetPlayerPawn(GetWorld(), 0);
 	UGameplayStatics::GetAllActorsOfClass(GetWorld(), AHW_Enemy::StaticClass(), Enemies);	
 
-	if(IsValid(PlayerPawn))
+	if (IsValid(PlayerPawn))
+	{
 		PlayerCharacter = Cast<AHW_Character>(PlayerPawn);
+	}
 
 	GameInstanceReference = Cast<UHW_GameInstance>(GetWorld()->GetGameInstance());
 	healthComponent->OnHealthChangeDelegate.AddDynamic(this, &AHW_Bot::TakingDamage);
@@ -77,7 +79,9 @@ FVector AHW_Bot::GetNextPathPoint()
 	for (AActor* Enemy : Enemies)
 	{
 		if (!GetWorld()->ContainsActor(Enemy))
-			continue;		
+		{
+			continue;
+		}
 
 			EnemyToHealth = Cast<AHW_Enemy>(Enemy);
 		if (IsValid(EnemyToHealth) && EnemyToHealth->GetHealth() < EnemyToHealth->GetMaxHealth())
@@ -104,8 +108,10 @@ FVector AHW_Bot::GetNextPathPoint()
 
 void AHW_Bot::TakingDamage(UHW_HealthComponent* CurrentHealthComponent, AActor* DamagedActor, float Damage, const UDamageType* DamageType, AController* InstigatedBy, AActor* DamageCauser)
 {
-	if (IsValid(BotMaterial))	
+	if (IsValid(BotMaterial))
+	{
 		BotMaterial->SetScalarParameterValue("Pulse", GetWorld()->TimeSeconds);
+	}
 
 	if (CurrentHealthComponent->IsDead())
 	{
@@ -117,12 +123,16 @@ void AHW_Bot::TakingDamage(UHW_HealthComponent* CurrentHealthComponent, AActor* 
 void AHW_Bot::SelfDestruction()
 {
 	if (bIsExploded)
+	{
 		return;
+	}
 
 	bIsExploded = true;
 
-	if(IsValid(ExplosionEffect))
+	if (IsValid(ExplosionEffect))
+	{
 		UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), ExplosionEffect, GetActorLocation());
+	}
 
 	TArray<AActor*> IgnoredActors;
 	IgnoredActors.Add(this);
@@ -130,11 +140,15 @@ void AHW_Bot::SelfDestruction()
 	UGameplayStatics::ApplyRadialDamage(GetWorld(), ExplosionDamage, GetActorLocation(), ExplosionRadius, nullptr, IgnoredActors, this, GetInstigatorController(), true);
 
 	if (bDebug)
+	{
 		DrawDebugSphere(GetWorld(), GetActorLocation(), ExplosionRadius, 20.0f, FColor::Red, true, 5.0f, 0, 2);
+	}
 
 
 	if (IsValid(MySpawner))
+	{
 		MySpawner->NotifyBotDead();
+	}
 
 	SpawnKey();
 
@@ -149,11 +163,15 @@ void AHW_Bot::StartCountDown(UPrimitiveComponent* OverlappedComponent, AActor* O
 	{		
 		EnemyToHealth->Healing();
 		if (IsValid(HealingEffect))
+		{
 			UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), HealingEffect, GetActorLocation());
+		}
 	}
 
 	if (bIsStartingCountDown)
+	{
 		return;
+	}
 
 	if (OtherActor == PlayerCharacter)
 	{		
@@ -178,8 +196,10 @@ void AHW_Bot::SpawnKey()
 			FActorSpawnParameters SpawnParameters;
 			SpawnParameters.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
 			AHW_BotSpawnerKey* NewBotSpawnerKey = Cast<AHW_BotSpawnerKey>(GetWorld()->SpawnActor<AHW_Item>(LootItemKeyClass, GetActorLocation(), FRotator::ZeroRotator, SpawnParameters));
-			if(IsValid(NewBotSpawnerKey))
+			if (IsValid(NewBotSpawnerKey))
+			{
 				NewBotSpawnerKey->SetMyBot(this);
+			}
 		}
 	}
 }
@@ -213,8 +233,9 @@ void AHW_Bot::Tick(float DeltaTime)
 		BotMeshComponent->AddForce(ForceDirection, NAME_None, true);
 	}
 
-	if(bDebug)
+	if (bDebug)
+	{
 		DrawDebugSphere(GetWorld(), NextPathPoint, 30.0f, 15.0f, FColor::Purple, false, 0.0f, 0, 1);
-
+	}
 }
 

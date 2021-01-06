@@ -132,5 +132,4 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 	void SetSpawner(AHW_BotSpawner* NewSpawner) { MySpawner = NewSpawner; };
-
 };
