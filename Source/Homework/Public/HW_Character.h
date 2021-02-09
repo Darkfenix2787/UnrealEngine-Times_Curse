@@ -6,8 +6,6 @@
 #include "GameFramework/Character.h"
 #include "HW_Character.generated.h"
 
-
-
 class USpringArmComponent;
 class UCameraComponent;
 class AHW_Weapon;
@@ -24,7 +22,6 @@ class USoundCue;
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnUltimateUpdateSignature, float, CurrentUltimateXP, float, MaxUltimateXP);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnUltimateStatusSignature, bool, bIsAvailable);
 
-
 UENUM(Blueprintable)
 enum class EHW_CharacteraType : uint8
 {
@@ -32,8 +29,6 @@ enum class EHW_CharacteraType : uint8
 	CharacteraType_Enemy		UMETA(DisplayName = "Enemy"),
 	
 };
-
-
 
 UCLASS()
 class HOMEWORK_API AHW_Character : public ACharacter
@@ -156,14 +151,14 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Key")
 		TArray<FName> DoorKeys;	
 
-	UPROPERTY(EditDefaultsOnly,BlueprintReadOnly)
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
 		EHW_CharacteraType CharacterType;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Weapon")
-	 	TArray<TSubclassOf<AHW_Weapon>> WeaponClass;	
+		AHW_Weapon* CurrentWeapon;	
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Weapon")
-		AHW_Weapon* CurrentWeapon;
+	 	TArray<TSubclassOf<AHW_Weapon>> WeaponClass;		
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Animation")
 		UAnimMontage* MeeleMontage;
@@ -177,7 +172,14 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Pause")
 		UHW_PauseMenuWidget* PauseWidget;
 
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Audio")
+		USoundCue* HurtSound;
 
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Audio")
+		USoundCue* DeadSound;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Audio")
+		USoundCue* UltimateSound;
 	
 	UAnimInstance* MyAnimInstance;
 	AHW_GameMode* GameModeReference;
@@ -186,16 +188,6 @@ protected:
 	FTimerHandle TimerHandle_Ultimate;
 	FTimerHandle TimerHandle_AutomaticShoot;
 	FTimerHandle TimerHandle_BeginUltimateBehaviour;
-
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Audio")
-		USoundCue* HurtSound;
-	
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Audio")
-		USoundCue* DeadSound;
-
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Audio")
-		USoundCue* UltimateSound;
-	
 	
 public:
 
@@ -214,25 +206,36 @@ public:
 
 protected:
 	// Called when the game starts or when spawned
-	virtual void BeginPlay() override;		
+	virtual void BeginPlay() override;	
+
 	virtual void Jump () override;
+
 	virtual void StopJumping() override;
+
 	void InitializaReferences();
+
 	void MoveForward(float value);
-	void MoveRight(float value);
-	UFUNCTION(BlueprintCallable)
-		void StartWeaponAction();
-	UFUNCTION(BlueprintCallable)
-		void StopWeaponAction();	
+
+	void MoveRight(float value);		
+
 	void CreateInitialWeapon();
+
 	void ChangeWeapon();
+
+	void StartUltimate();
+
+	void GoToMainMenu();
+
+	void Pause();
+
 	UFUNCTION(BlueprintCallable)
 		void StartMeele();
-	void StopMeele();
-	void StartUltimate();	
-	void StopUltimate();
-	void GoToMainMenu();
-	void Pause();
+
+	UFUNCTION(BlueprintCallable)
+		void StartWeaponAction();
+
+	UFUNCTION(BlueprintCallable)
+		void StopWeaponAction();
 
 	UFUNCTION()
 		void MakeMeleeDamage(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
@@ -249,13 +252,7 @@ public:
 
 	virtual void AddControllerPitchInput(float value) override;
 
-	void AddKey(FName NewKey);
-
-	bool HasKey(FName KayTag);
-
-	bool TryAddHealth(float HealthToAdd);
-
-	float GetCurrentComboMultiplier();
+	void AddKey(FName NewKey);	
 
 	void SetMeleeDetectorCollision(ECollisionEnabled::Type NewCollisionState);
 
@@ -263,41 +260,47 @@ public:
 
 	void ModifyDilation(float ModifyValue);
 
-	void StopMoveCharacter(float NewSpeed, bool UseWeapon);
+	void StopMoveCharacter(float NewSpeed, bool UseWeapon);	
 
-	UFUNCTION(BlueprintCallable)
-		void SetComboEnable(bool bNewState);
-	
-	UFUNCTION(BlueprintCallable)
-		void ResetCombo();
+	void UpdateUltimateDuration(float Value);
+
+	void UpdateUltimateDurationWithTimer();
+
+	void BeginUltimateBehaviour();
+
+	void DilationIteration(float CustomIterator);
+
+	void Healing();
+
+	void PlayStepSound();
+
+	void PlayVoiceSound(USoundCue* VoiceSound);
+
+	bool HasKey(FName KayTag);
+
+	bool TryAddHealth(float HealthToAdd);
 
 	bool HasToDestroy() { return bHasToDestroy; };
 
+	float GetCurrentComboMultiplier();
+
 	float GetHealth();
 
-	float GetMaxHealth();
+	float GetMaxHealth();		
+
+	UHW_HealthComponent* GetHealthComponent() { return HealthComponent; };
 
 	UFUNCTION(BlueprintCallable)
 		void GainUltimateXP(float XPGained);
 
-		void UpdateUltimateDuration(float Value);
+	UFUNCTION(BlueprintCallable)
+		void SetComboEnable(bool bNewState);
 
-		void UpdateUltimateDurationWithTimer();
+	UFUNCTION(BlueprintCallable)
+		void ResetCombo();
 
-		void BeginUltimateBehaviour();
-
-		void DilationIteration(float CustomIterator);
-
-		void Healing();
-
-		UFUNCTION(BlueprintCallable)
-			EHW_CharacteraType GetCharacterType() { return CharacterType; };	
-
-		UHW_HealthComponent* GetHealthComponent() { return HealthComponent; };
-
-		void PlayStepSound();
-
-		void PlayVoiceSound(USoundCue* VoiceSound);
+	UFUNCTION(BlueprintCallable)
+		EHW_CharacteraType GetCharacterType() { return CharacterType; };	
 
 protected:
 
@@ -312,6 +315,5 @@ protected:
 
 	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)
 		void BP_UpdateUltimateDuration(float Value);
-
 
 };
