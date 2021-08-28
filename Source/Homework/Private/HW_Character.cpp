@@ -20,6 +20,7 @@
 #include "UI/PauseMenu/HW_PauseMenuWidget.h"
 #include "Components/AudioComponent.h"
 #include "Sound/SoundCue.h"
+#include "Weapon/HW_Rifle.h"
 
 //====================================================================================================================================//
 // Sets default values
@@ -141,11 +142,9 @@ void AHW_Character::CreateInitialWeapon()
 void AHW_Character::ChangeWeapon()
 {
 	if (IsValid(CurrentWeapon) && WeaponClass.IsValidIndex(0))
-	{
-		TArray<FName> Name = CurrentWeapon->Tags;
-		FString SName = Name[0].ToString();
-
-		if (SName == "Rifle")
+	{	
+		
+		if (IsValid(Cast<AHW_Rifle>(CurrentWeapon)))
 		{
 			CurrentWeapon = GetWorld()->SpawnActor<AHW_Weapon>(WeaponClass[1], GetActorLocation(), GetActorRotation());
 		}
